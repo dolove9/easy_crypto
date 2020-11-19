@@ -14,7 +14,7 @@ type CertUtil struct {
 
 func (certUtil *CertUtil)CertUtilFromFileName(path string)  (error) {
 	fileUtil := FileUtil{}
-	certByte, err := fileUtil.readBytesFromFileName(path)
+	certByte, err := fileUtil.ReadBytesFromFileName(path)
 	if err != nil{
 		return err
 	}
@@ -80,35 +80,35 @@ func (certUtil CertUtil)SubjectAltName()  (VidResult, error){
 				var temp5 asn1.RawValue
 				asn1.Unmarshal(temp4.Bytes, &temp5) //SEQUENCE
 
-				//fmt.Println(FileUtil{}.dumpByteArrayToString(temp5.Bytes))
+				//fmt.Println(FileUtil{}.DumpByteArrayToString(temp5.Bytes))
 				var realName asn1.RawValue
 				r, _ := asn1.Unmarshal(temp5.Bytes, &realName) //UTF8String realName
-				//fmt.Println(FileUtil{}.dumpByteArrayToString(realName.Bytes))
+				//fmt.Println(FileUtil{}.DumpByteArrayToString(realName.Bytes))
 				//fmt.Println(string(realName.Bytes))
-				//fmt.Println(FileUtil{}.dumpByteArrayToString(r))
+				//fmt.Println(FileUtil{}.DumpByteArrayToString(r))
 
 
 				//vidSeq := asn1.ObjectIdentifier{ 1,2,410,200004,10,1,1,1}
 				var vidSeq asn1.RawValue
 				asn1.Unmarshal(r, &vidSeq)
 				//fmt.Println("--" + strconv.Itoa(vidSeq.Tag))
-				//fmt.Println("--" + FileUtil{}.dumpByteArrayToString(vidSeq.Bytes))
+				//fmt.Println("--" + FileUtil{}.DumpByteArrayToString(vidSeq.Bytes))
 
 				var vidSeq2 asn1.RawValue
 				asn1.Unmarshal(vidSeq.Bytes, &vidSeq2)
 				var vidOid asn1.ObjectIdentifier
 				vidStruct, _ := asn1.Unmarshal(vidSeq2.Bytes, &vidOid)
-				//fmt.Println("--" + FileUtil{}.dumpByteArrayToString(vidStruct))
+				//fmt.Println("--" + FileUtil{}.DumpByteArrayToString(vidStruct))
 
 				//seq in vid struct
 				var inVidSeq asn1.RawValue
 				asn1.Unmarshal(vidStruct, &inVidSeq)
-				//fmt.Println("--" + FileUtil{}.dumpByteArrayToString(inVidSeq.Bytes))
+				//fmt.Println("--" + FileUtil{}.DumpByteArrayToString(inVidSeq.Bytes))
 
 				var inVidSeq2 asn1.RawValue
 				bytes, _ := asn1.Unmarshal(inVidSeq.Bytes, &inVidSeq2)
-				//fmt.Println("--" + FileUtil{}.dumpByteArrayToString(inVidSeq2.Bytes))
-				//fmt.Println("--" + FileUtil{}.dumpByteArrayToString(bytes))
+				//fmt.Println("--" + FileUtil{}.DumpByteArrayToString(inVidSeq2.Bytes))
+				//fmt.Println("--" + FileUtil{}.DumpByteArrayToString(bytes))
 
 				//HASH  ObjectIdentifier asn1.ObjectIdentifier{ 2,16,840,1,101,3,4,2,1} //SHA 256
 				var vidBodyOctetString asn1.RawValue
@@ -117,7 +117,7 @@ func (certUtil CertUtil)SubjectAltName()  (VidResult, error){
 				//OCTET_STRING
 				var vidBody asn1.RawValue
 				asn1.Unmarshal(vidBodyOctetString.Bytes, &vidBody)
-				//fmt.Println("--" + FileUtil{}.dumpByteArrayToString(vidBody.Bytes))
+				//fmt.Println("--" + FileUtil{}.DumpByteArrayToString(vidBody.Bytes))
 
 				vidResult := new(VidResult)
 				vidResult.realName = string(realName.Bytes)
