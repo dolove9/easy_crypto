@@ -10,9 +10,9 @@ func TestLoadPrivateKey(t *testing.T) {
 	assert := assert.New(t)
 	keyUtil := KeyUtil{}
 
-	keyBase64Encode, _ := FileUtil{}.readBytesFromFileName("C:/workspace/2021/dev/golang/resources/cert/dec_private.key")
+	keyBase64Encode, _ := FileUtil{}.ReadBytesFromFileName("C:/workspace/2021/dev/golang/resources/cert/dec_private.key")
 	decryptedPriKey, _ := Base64Util{}.Decoding(string(keyBase64Encode))
-	fmt.Println(FileUtil{}.dumpByteArrayToString(decryptedPriKey))
+	fmt.Println(FileUtil{}.DumpByteArrayToString(decryptedPriKey))
 
 	privateKey, err := keyUtil.LoadPrivateKey(decryptedPriKey)
 

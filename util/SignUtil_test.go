@@ -10,7 +10,7 @@ func TestSignUtil_SignPKCS1v15WithSha256(t *testing.T) {
 	signUtil := SignUtil{}
 
 	keyUtil := KeyUtil{}
-	keyBase64Encode, _ := FileUtil{}.readBytesFromFileName("C:/workspace/2021/dev/golang/resources/cert/dec_private.key")
+	keyBase64Encode, _ := FileUtil{}.ReadBytesFromFileName("C:/workspace/2021/dev/golang/resources/cert/dec_private.key")
 	decryptedPriKey, _ := Base64Util{}.Decoding(string(keyBase64Encode))
 
 	privateKey, _ := keyUtil.LoadPrivateKey(decryptedPriKey)
